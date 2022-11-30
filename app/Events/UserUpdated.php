@@ -10,23 +10,19 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class UserSessionChanged implements ShouldBroadcast
+class UserUpdated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $message;
-    public $type;
-
+    public $user;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($message, $type)
+    public function __construct($user)
     {
-        $this->message=$message;
-         $this->type=$type;
-
+        $this->$user= $user;
     }
 
     /**
@@ -36,7 +32,6 @@ class UserSessionChanged implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-   
-       return new PrivateChannel('notifications');
+        return new Channel('users');
     }
 }
