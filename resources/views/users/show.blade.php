@@ -34,7 +34,8 @@
     })
 </script>
 <script>
-   window.Echo.channel('users')
+    
+   Echo.channel('users')
     .listen('UserCreated', (e)=>{
          const usersElement = document.getElementById('users');
         let element = document.createElement('li');
