@@ -112,4 +112,14 @@
     window.axios.post('/chat/greet/'+id);
   }
 </script>
+<script>
+  Echo.private(`chat.greet.{{auth()->user()->id}}`)
+  .listen('GreetingSent', (e)=>{
+    let element = document.createElement('li');
+    element.innerText = e.message;
+    element.classList.add('text-success');
+    messageElement.appendChild(element);
+  })
+  ;
+</script>
 @endpush
